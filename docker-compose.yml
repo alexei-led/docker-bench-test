@@ -15,9 +15,9 @@ docker-bench-test:
     stdin_open: true
     tty: true
     volumes:
-       - /var/lib:/var/lib
-       - /var/run/docker.sock:/var/run/docker.sock
-       - /usr/lib/systemd:/usr/lib/systemd
+        - /var/lib:/var/lib
+        - /var/run/docker.sock:/var/run/docker.sock
+        - /usr/lib/systemd:/usr/lib/systemd
         - /var/docker-bench-test:/var/docker-bench-test
         - /etc/fstab:/etc/fstab
         - /etc/docker:/etc/docker

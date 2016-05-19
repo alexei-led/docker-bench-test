@@ -1,0 +1,22 @@
+machine:
+  pre:
+    - sudo curl -L -o /usr/bin/docker 'https://s3-external-1.amazonaws.com/circle-downloads/docker-1.9.1-circleci'
+    - sudo chmod 0755 /usr/bin/docker
+  services:
+    - docker
+dependencies:
+  override:
+    # create Docker Bench Test Docker image too
+    - docker build -t gaiaadm/docker-bench-test .
+    - docker tag gaiaadm/docker-bench-test gaiaadm/docker-bench-test:$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH
+    - docker tag gaiaadm/docker-bench-test gaiaadm/docker-bench-test:$CIRCLE_BRANCH
+deployment:
+  continuous:
+    branch: [master, develop, /feature_.*/]
+    commands:
+      # deply image to DockerHub
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker push gaiaadm/docker-bench-test
+notify:
+  webhooks:
+    - url: http://beta.gaiahub.io:88/wh/5a866f9b-98c9-438d-a8d4-53cf4ae9599c/4c310c8e220ee9bead74eece42ce0e109fd3535e

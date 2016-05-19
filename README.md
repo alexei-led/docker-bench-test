@@ -1,5 +1,7 @@
 # Docker Bench Test
 
+[![Circle CI](https://circleci.com/gh/gaia-adm/docker-bench-test.svg?style=svg)](https://circleci.com/gh/gaia-adm/docker-bench-test)  [![](https://badge.imagelayers.io/gaiaadm/docker-bench-test:master.svg)](https://imagelayers.io/?images=gaiaadm/docker-bench-test:master)
+
 The Docker Bench Test is a [Bats](https://github.com/sstephenson/bats) test set that contains tests for dozens of common best-practices around deploying Docker containers in production. The tests are fully automated, are inspired by the [CIS Docker 1.11 Benchmark](https://benchmarks.cisecurity.org/tools2/docker/CIS_Docker_1.11.0_Benchmark_v1.0.0.pdf) and based on [Docker Bench for Security](https://github.com/docker/docker-bench-security).
 
 We are making this available as an open-source utility so the Docker community can have an easy way to self-assess their hosts and docker containers against this benchmark.
@@ -66,7 +68,7 @@ docker run -it --net host --pid host --cap-add audit_control \
     -v /etc/default/docker:/etc/default/docker \
     -v /etc/group:/etc/group \
     --label docker_bench_test \
-    gaia-adm/docker-bench-test
+    gaiaadm/docker-bench-test
 ```
 
 ## Build Docker Bench Test Docker image
