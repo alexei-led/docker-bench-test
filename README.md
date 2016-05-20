@@ -78,6 +78,8 @@ First, clone and compile your `docker-bench-test` Docker image.
 ```sh
 git clone https://github.com/gaia-adm/docker-bench-test.git
 cd docker-bench-test
+git submodule init
+git submodule update
 docker build -t docker-bench-test .
 ```
 
@@ -85,6 +87,8 @@ or use [Docker Compose](https://docs.docker.com/compose/):
 ```sh
 git clone https://github.com/gaia-adm/docker-bench-test.git
 cd docker-bench-test
+git submodule init
+git submodule update
 docker-compose run --rm docker-bench-test
 ```
 
@@ -93,5 +97,7 @@ Also, this script can also be simply run from your base host by running:
 ```sh
 git clone https://github.com/gaia-adm/docker-bench-test.git
 cd docker-bench-test
+git submodule init
+git submodule update
 sh docker-bench-test.sh
 ```
