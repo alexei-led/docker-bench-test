@@ -46,7 +46,7 @@ load "$BATS_TEST_DIRNAME/../helper_lib.sh"
 
 # 3.5
 @test "3.5  - Verify that /etc/docker directory ownership is set to root:root" {
-  directory="/etc/docker"
+  directory="$(get_etc_path)/docker"
   if [ -d "$directory" ]; then
     if [ "$(stat -c %u%g $directory)" -ne 00 ]; then
       fail "Wrong ownership for $directory"
@@ -56,7 +56,7 @@ load "$BATS_TEST_DIRNAME/../helper_lib.sh"
 
 # 3.6
 @test "3.6  - Verify that /etc/docker directory permissions are set to 755 or 700" {
-  directory="/etc/docker"
+  directory="$(get_etc_path)/docker"
   if [ -d "$directory" ]; then
     if [ "$(stat -c %a $directory)" -ne 755 ] && [ "$(stat -c %a $directory)" -ne 700 ]; then
       fail "Wrong permissions for $directory : $(stat -c %a $directory)"
@@ -66,7 +66,7 @@ load "$BATS_TEST_DIRNAME/../helper_lib.sh"
 
 # 3.7
 @test "3.7  - Verify that registry certificate file ownership is set to root:root" {
-  directory="/etc/docker/certs.d/"
+  directory="$(get_etc_path)/docker/certs.d/"
   if [ -d "$directory" ]; then
     fail=0
     owners=$(ls -lL $directory | grep ".crt" | awk '{print $3, $4}')
@@ -84,7 +84,7 @@ load "$BATS_TEST_DIRNAME/../helper_lib.sh"
 
 # 3.8
 @test "3.8  - Verify that registry certificate file permissions are set to 444" {
-  directory="/etc/docker/certs.d/"
+  directory="$(get_etc_path)/docker/certs.d/"
   if [ -d "$directory" ]; then
     fail=0
     perms=$(ls -lL $directory | grep ".crt" | awk '{print $1}')
@@ -184,7 +184,7 @@ load "$BATS_TEST_DIRNAME/../helper_lib.sh"
 
 # 3.17
 @test "3.17 - Verify that daemon.json file ownership is set to root:root" {
-  file="/etc/docker/daemon.json"
+  file="$(get_etc_path)/docker/daemon.json"
   if [ -f "$file" ]; then
     if [ "$(stat -c %U:%G $file)" != 'root:root' ]; then
       fail "Wrong ownership for $file"
@@ -194,7 +194,7 @@ load "$BATS_TEST_DIRNAME/../helper_lib.sh"
 
 # 3.18
 @test "3.18 - Verify that daemon.json file permissions are set to 644" {
-  file="/etc/docker/daemon.json"
+  file="$(get_etc_path)/docker/daemon.json"
   if [ -f "$file" ]; then
     if [ "$(stat -c %a $file)" -ne 644 ]; then
       fail "Wrong permissions for $file"
@@ -204,7 +204,7 @@ load "$BATS_TEST_DIRNAME/../helper_lib.sh"
 
 # 3.19
 @test "3.19 - Verify that /etc/default/docker file ownership is set to root:root" {
-  file="/etc/default/docker"
+  file="$(get_etc_path)/default/docker"
   if [ -f "$file" ]; then
     if [ "$(stat -c %U:%G $file)" != 'root:root' ]; then
       fail "Wrong ownership for $file"
@@ -214,7 +214,7 @@ load "$BATS_TEST_DIRNAME/../helper_lib.sh"
 
 # 3.20
 @test "3.20 - Verify that /etc/default/docker file permissions are set to 644" {
-  file="/etc/default/docker"
+  file="$(get_etc_path)/default/docker"
   if [ -f "$file" ]; then
     if [ "$(stat -c %a $file)" -ne 644 ]; then
       fail "Wrong permissions for $file"

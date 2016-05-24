@@ -19,7 +19,4 @@ docker-bench-test:
         - /var/run/docker.sock:/var/run/docker.sock
         - /usr/lib/systemd:/usr/lib/systemd
         - /var/docker-bench-test:/var/docker-bench-test
-        - /etc/fstab:/etc/fstab
-        - /etc/docker:/etc/docker
-        - /etc/default/docker:/etc/default/docker
-        - /etc/group:/etc/group
+        - /etc:/host/etc

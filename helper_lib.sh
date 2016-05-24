@@ -86,11 +86,20 @@ get_docker_effective_command_line_args() {
     get_docker_cumulative_command_line_args $OPTION | tail -n1
 }
 
+get_etc_path(){
+    # running in Docker container: mount /etc directory to /host/etc
+    if [ -d /host/etc ]; then
+        echo "/host/etc"
+    else
+        echo "/etc"
+    fi
+}
+
 get_systemd_service_file(){
     SERVICE="$1"
 
-    if [ -f "/etc/systemd/system/$SERVICE" ]; then
-      echo "/etc/systemd/system/$SERVICE"
+    if [ -f "$(get_etc_path)/systemd/system/$SERVICE" ]; then
+      echo "$(get_etc_path)/systemd/system/$SERVICE"
     elif systemctl show -p FragmentPath "$SERVICE" 2> /dev/null 1>&2; then
       systemctl show -p FragmentPath "$SERVICE" | sed 's/.*=//'
     else

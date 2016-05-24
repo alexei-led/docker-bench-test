@@ -16,7 +16,7 @@ dependencies:
     - docker tag gaiaadm/docker-bench-test gaiaadm/docker-bench-test:$CIRCLE_BRANCH
 test:
   override:
-    - docker run -it --net host --pid host --cap-add audit_control -v /var/lib:/var/lib -v /var/run/docker.sock:/var/run/docker.sock -v /usr/lib/systemd:/usr/lib/systemd -v /etc/fstab:/etc/fstab -v /etc/docker:/etc/docker -v /etc/default/docker:/etc/default/docker -v /etc/group:/etc/group --label docker_bench_test gaiaadm/docker-bench-test -p
+    - docker run -it --net host --pid host --cap-add audit_control -v /var/lib:/var/lib -v /var/run/docker.sock:/var/run/docker.sock -v /usr/lib/systemd:/usr/lib/systemd -v /etc:/host/etc --label docker_bench_test gaiaadm/docker-bench-test -p
 deployment:
   continuous:
     branch: [master, develop, /feature_.*/]

@@ -20,8 +20,6 @@ With **Docker Bench Test** we have the following goals:
 
 Docker Bench Test requires Docker 1.10.0 or later in order to run.
 
-Also note that the default image and `Dockerfile` uses `FROM: alpine` which doesn't contain `auditctl`, this will generate errors in section 1.8 to 1.18. Distribution specific Dockerfiles that fixes this issue are available in the [distros directory](https://github.com/gaia-adm/docker-bench-test/tree/master/distros).
-
 The [distribution specific Dockerfiles](https://github.com/gaia-adm/docker-bench-test/tree/master/distros) may also help if the distribution you're using haven't yet shipped Docker version 1.10.0 or later.
 
 ## Running Docker Bench Bats tests
@@ -63,10 +61,7 @@ docker run -it --net host --pid host --cap-add audit_control \
     -v /var/run/docker.sock:/var/run/docker.sock \
     -v /usr/lib/systemd:/usr/lib/systemd \
     -v /var/docker-bench-test:/var/docker-bench-test \
-    -v /etc/fstab:/etc/fstab \
-    -v /etc/docker:/etc/docker \
-    -v /etc/default/docker:/etc/default/docker \
-    -v /etc/group:/etc/group \
+    -v /etc:/host/etc \
     --label docker_bench_test \
     gaiaadm/docker-bench-test
 ```

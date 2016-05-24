@@ -1,7 +1,6 @@
 #!/bin/bash
 
 . ./generate_tests.sh
-. ./config/0_config.sh
 
 TEST_RESULTS=$BENCH_ROOT/results
 

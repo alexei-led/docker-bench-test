@@ -1,13 +1,13 @@
 #!/usr/bin/env bats
 
-
 load "test_helper/bats-support/load"
 load "test_helper/bats-assert/load"
 load "$BATS_TEST_DIRNAME/../helper_lib.sh"
+load "$BATS_TEST_DIRNAME/../config/0_config.sh"
 
 # 1.1
 @test "1.1  - Create a separate partition for containers" {
-  run grep /var/lib/docker /etc/fstab
+  run grep /var/lib/docker "$(get_etc_path)/fstab"
   assert_success
 }
 
@@ -46,10 +46,10 @@ load "$BATS_TEST_DIRNAME/../helper_lib.sh"
 
 # 1.6
 @test "1.6  - Only allow trusted users to control Docker daemon" {
-  users_string=$(awk -F':' '/^docker/{print $4}' /etc/group)
+  users_string=$(awk -F':' '/^docker/{print $4}' $(get_etc_path)/group)
   docker_users=(${users_string//,/ })
   for u in "${docker_users[@]}"; do
-    local found=1
+    found=1
     for tu in "${config_trusted_users[@]}"; do
       if [ "$u" = "$tu" ]; then
         found=0
@@ -61,31 +61,27 @@ load "$BATS_TEST_DIRNAME/../helper_lib.sh"
   done
 }
 
-# 1.7
-@test "1.7  - Audit docker daemon - /usr/bin/docker" {
-  file="/usr/bin/docker"
-  run command -v auditctl
-  assert_success
-  run auditctl -l | grep "$file"
-  assert_success
-}
-
 test_audit_directory() {
-  local directory="$1"
+  directory="$1"
   assert [ -d "$directory" ]
-  run command -v auditctl >/dev/null
-  assert_success
-  run auditctl -l | grep "$directory"
+  # grep for $file; ignore commented out lines
+  result=$(grep "$file" "$(get_etc_path)/audit/audit.rules")
+  run grep "^[^#;]" <<< "$result"
   assert_success
 }
 
 test_audit_file() {
   file="$1"
   assert [ -f "$file" ]
-  run command -v auditctl
+  # grep for $file; ignore commented out lines
+  result=$(grep "$file" "$(get_etc_path)/audit/audit.rules")
+  run grep "^[^#;]" <<< "$result"
   assert_success
-  run auditctl -l | grep "$file"
-  assert_success
+}
+
+# 1.7
+@test "1.7  - Audit docker daemon - /usr/bin/docker" {
+  test_audit_file "/usr/bin/docker"
 }
 
 # 1.8
