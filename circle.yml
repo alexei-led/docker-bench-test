@@ -4,6 +4,10 @@ machine:
     - sudo chmod 0755 /usr/bin/docker
   services:
     - docker
+checkout:
+  post:
+    - git submodule sync
+    - git submodule update --init
 dependencies:
   override:
     # create Docker Bench Test Docker image too
