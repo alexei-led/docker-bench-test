@@ -97,11 +97,11 @@ shift $((OPTIND-1))  #This tells getopts to move on to the next argument.
 
 ### Run Bats tests ###
 
-TESTS="${TEST_ROOT}"
-if [ ! -d "${TEST_ROOT}" ]; then # generate tests if needed
-  generate_all_tests
-fi
+## re/generate_all_tests
+generate_all_tests
 
+# get tests to run: default to all tests
+TESTS="${TEST_ROOT}"
 if [ $# -ne 0 ]; then # get tests from command line
   TESTS=$*
 fi
