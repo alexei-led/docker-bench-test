@@ -15,6 +15,9 @@ prepare_tests_directory()
   if [ ! -f "$BENCH_ROOT/helper_lib.sh" ]; then
     cp helper_lib.sh $BENCH_ROOT
   fi
+  if [ ! -f "$BENCH_ROOT/config" ]; then
+    cp -r config $BENCH_ROOT
+  fi
   cp -r $TEST_SRC $TEST_ROOT
 }
 
