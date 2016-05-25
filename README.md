@@ -53,7 +53,7 @@ Example: docker-bench-test.sh -t -o /var/docker-bench-test/results
 
 ### Running Docker Bench Test tests from Docker image
 
-Then run `docker-bench-tests` container (as bellow). Test results will be saved into `/var/docker-bench-test` folder in TAP format. Test results file is named accoring to the `test_<timestamp>.tap` pattern.
+Then run `docker-bench-tests` container (as bellow). Test results will be saved into `/var/docker-bench-test` folder in TAP format. Test results file is named accoring to the `tests_<timestamp>.tap` pattern. Latest test results will be always saved to `tests_latest.tap`
 
 ```sh
 docker run -it --net host --pid host --cap-add audit_control \
