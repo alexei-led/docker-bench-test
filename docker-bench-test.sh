@@ -110,7 +110,7 @@ if [ ${OPT_RESULTS} -eq 0 ]; then # run tests and [create test result file]
   if [ ! -d "$OPT_OUTPUT" ]; then
     mkdir -p "$OPT_OUTPUT"
   fi
-  bats "${TESTS}" -${OPT_FORMAT} > "${OPT_OUTPUT}/tests_$(date +%s).tap"
+  bats "${TESTS}" -${OPT_FORMAT} | tee "${OPT_OUTPUT}/tests_$(date +%s).tap" "${OPT_OUTPUT}/tests_latest.tap" > /dev/null
 else
   bats "${TESTS}" -${OPT_FORMAT}
 fi
