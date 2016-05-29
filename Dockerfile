@@ -40,6 +40,6 @@ CMD ["-r"]
 ENTRYPOINT ["./docker-bench-test.sh"]
 
 LABEL test=true
-LABEL test.run.interval=300000
+LABEL test.run.interval=5m
 LABEL test.results.dir=/var/docker-bench-test/results
 LABEL test.results.file=tests_latest.tap
