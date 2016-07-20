@@ -43,3 +43,7 @@ LABEL test=true
 LABEL test.run.interval=24h
 LABEL test.results.dir=/var/docker-bench-test/results
 LABEL test.results.file=tests_latest.tap
+
+LABEL tugbot.test=true
+LABEL tugbot.results.dir=/var/docker-bench-test/results
+LABEL tugbot.event.docker=start
