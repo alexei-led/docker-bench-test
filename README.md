@@ -1,6 +1,8 @@
 # Docker Bench Test
 
-[![Circle CI](https://circleci.com/gh/gaia-adm/docker-bench-test.svg?style=svg)](https://circleci.com/gh/gaia-adm/docker-bench-test)  [![](https://badge.imagelayers.io/gaiaadm/docker-bench-test:master.svg)](https://imagelayers.io/?images=gaiaadm/docker-bench-test:master)
+[![Circle CI](https://circleci.com/gh/gaia-adm/docker-bench-test.svg?style=svg)](https://circleci.com/gh/gaia-adm/docker-bench-test) 
+[![Docker](https://img.shields.io/docker/pulls/gaiaadm/docker-bench-test.svg)](https://hub.docker.com/r/gaiaadm/docker-bench-test/)
+[![](https://badge.imagelayers.io/gaiaadm/docker-bench-test:master.svg)](https://imagelayers.io/?images=gaiaadm/docker-bench-test:master)
 
 The Docker Bench Test is a [Bats](https://github.com/sstephenson/bats) test set that contains tests for dozens of common best-practices around deploying Docker containers in production. The tests are fully automated, are inspired by the [CIS Docker 1.11 Benchmark](https://benchmarks.cisecurity.org/tools2/docker/CIS_Docker_1.11.0_Benchmark_v1.0.0.pdf) and based on [Docker Bench for Security](https://github.com/docker/docker-bench-security).
 
