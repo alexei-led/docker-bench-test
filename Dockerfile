@@ -46,4 +46,6 @@ LABEL test.results.file=tests_latest.tap
 
 LABEL tugbot.test=true
 LABEL tugbot.results.dir=/var/docker-bench-test/results
-LABEL tugbot.event.docker=start
+LABEL tugbot.event.docker
+LABEL tugbot.event.docker.filter.type=container,image,daemon
+LABEL tugbot.event.docker.filter.action=start,pull,reload
